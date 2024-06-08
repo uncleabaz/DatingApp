@@ -1,4 +1,4 @@
- using API.Data;
+using API.Data;
 using Microsoft.EntityFrameworkCore;
 
     
@@ -11,11 +11,16 @@ using Microsoft.EntityFrameworkCore;
         {
             Opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
         });
+        builder.Services.AddCors();
         var app = builder.Build();
     
       //     Configure the HTTP request pipeline.
+      app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://Localhost:4200"));
 
-        app.UseHttpsRedirection();
+    
+
+
+app.UseHttpsRedirection();
         app.UseAuthorization();
 
          app.MapControllers();
